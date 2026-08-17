@@ -1,0 +1,170 @@
+/* Основная кнопка в стиле Telegram */
+.telegramButton {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	border: none;
+	padding: 14px 28px;
+	border-radius: 12px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.telegramButton:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.telegramButton:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
+}
+
+/* Кнопка с эффектом свечения */
+.glowButton {
+	background: #0088cc;
+	color: white;
+	border: none;
+	padding: 14px 32px;
+	border-radius: 25px;
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 0 20px rgba(0, 136, 204, 0.5);
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.glowButton:hover {
+	box-shadow: 0 0 35px rgba(0, 136, 204, 0.8);
+	transform: scale(1.05);
+}
+
+.glowButton:active {
+	transform: scale(0.95);
+	box-shadow: 0 0 15px rgba(0, 136, 204, 0.5);
+}
+
+/* Кнопка с градиентной анимацией */
+.animatedButton {
+	background: linear-gradient(270deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+	background-size: 800% 800%;
+	animation: gradientShift 6s ease infinite;
+	color: white;
+	border: none;
+	padding: 14px 28px;
+	border-radius: 50px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.animatedButton:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* Неоновая кнопка */
+.neonButton {
+	background: transparent;
+	color: #00ff88;
+	border: 2px solid #00ff88;
+	padding: 12px 30px;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+	box-shadow:
+		0 0 15px rgba(0, 255, 136, 0.3),
+		inset 0 0 15px rgba(0, 255, 136, 0.1);
+}
+
+.neonButton:hover {
+	background: #00ff88;
+	color: #1a1a1a;
+	box-shadow:
+		0 0 30px rgba(0, 255, 136, 0.6),
+		inset 0 0 20px rgba(0, 0, 0, 0.2);
+	text-shadow: none;
+}
+
+/* Минималистичная кнопка */
+.minimalButton {
+	background: white;
+	color: #333;
+	border: 1px solid #ddd;
+	padding: 12px 24px;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.minimalButton:hover {
+	border-color: #0088cc;
+	color: #0088cc;
+	box-shadow: 0 4px 12px rgba(0, 136, 204, 0.15);
+	transform: translateY(-1px);
+}
+
+/* Кнопка с ripple эффектом */
+.rippleButton {
+	background: #0088cc;
+	color: white;
+	border: none;
+	padding: 14px 32px;
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition: background 0.3s;
+}
+
+.rippleButton:hover {
+	background: #006699;
+}
+
+.rippleButton::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.5);
+	transform: translate(-50%, -50%);
+	transition:
+		width 0.6s,
+		height 0.6s;
+}
+
+.rippleButton:active::after {
+	width: 300px;
+	height: 300px;
+}
