@@ -5,7 +5,7 @@ declare global {
 		Telegram: {
 			WebApp: {
 				initData: string
-				initDataUnsafe: object
+				initDataUnsafe: TelegramInitDataUnsafe
 				version: string
 				platform: string
 				colorScheme: string
