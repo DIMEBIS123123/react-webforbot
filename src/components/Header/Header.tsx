@@ -7,7 +7,7 @@ const Header = () => {
 	const telegram = useTelegram()
 	return (
 		<div className='header'>
-			<span>{telegram.user.username}</span>
+			<span className='username'>{telegram.user.username}</span>
 			<Link to={'/form'} className='glowButton'>
 				Открыть Форму
 			</Link>
