@@ -25,7 +25,7 @@ const Form = () => {
 		paymentMethod: 'card',
 		comment: '',
 	})
-	const { tg } = useTelegram()
+	const { tg, onClose } = useTelegram()
 
 	const [errors, setErrors] = useState<FormErrors>({})
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -105,6 +105,7 @@ const Form = () => {
 			alert('Произошла ошибка. Попробуйте еще раз.')
 		} finally {
 			setIsSubmitting(false)
+			onClose()
 		}
 	}
 
