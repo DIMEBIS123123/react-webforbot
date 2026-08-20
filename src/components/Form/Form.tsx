@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import './Form.css'
+import { useTelegram } from '../../hooks/useTelegram'
 
 interface OrderFormData {
 	name: string
@@ -24,6 +25,7 @@ const Form = () => {
 		paymentMethod: 'card',
 		comment: '',
 	})
+	const { tg } = useTelegram()
 
 	const [errors, setErrors] = useState<FormErrors>({})
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -84,8 +86,7 @@ const Form = () => {
 			// Здесь будет отправка данных на сервер
 			console.log('Отправка заказа:', formData)
 
-			// Имитация запроса
-			await new Promise(resolve => setTimeout(resolve, 1000))
+			tg.sendData(JSON.stringify(formData))
 
 			alert('Заказ успешно оформлен!')
 
