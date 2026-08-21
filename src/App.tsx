@@ -9,7 +9,8 @@ import { useProducts } from './hooks/useProducts'
 
 function App() {
 	const telegram = useTelegram()
-	const { products, handleAddToCart } = useProducts()
+
+	const { products, handleAddToCart, productsBasket } = useProducts()
 	useEffect(() => {
 		telegram.tg.ready()
 	}, [])
@@ -19,9 +20,14 @@ function App() {
 			<Header></Header>
 			<Routes>
 				<Route
+					index
 					path='/'
 					element={
-						<ProductList products={products} onAddToCart={handleAddToCart} />
+						<ProductList
+							products={products}
+							onAddToCart={handleAddToCart}
+							productsBasket={productsBasket}
+						/>
 					}
 				></Route>
 				<Route path='/form' element={<Form />}></Route>
