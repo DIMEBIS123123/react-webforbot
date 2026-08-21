@@ -10,7 +10,7 @@ function App() {
 	const telegram = useTelegram()
 	useEffect(() => {
 		telegram.tg.ready()
-	}, [])
+	}, [telegram.tg])
 
 	return (
 		<div>

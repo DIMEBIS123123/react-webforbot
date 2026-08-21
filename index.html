@@ -9,6 +9,22 @@
 	</head>
 	<body>
 		<div id="root"></div>
+		<script>
+			// Добавляем отладочную информацию прямо в HTML
+			console.log('HTML загружен')
+			console.log('Telegram:', window.Telegram)
+
+			// Отслеживаем ошибки
+			window.addEventListener('error', function (e) {
+				console.error('Ошибка на уровне window:', e)
+				document.body.innerHTML = `
+                <div style="padding:20px;color:red;">
+                    <h2>Ошибка загрузки</h2>
+                    <p>${e.message}</p>
+                </div>
+            `
+			})
+		</script>
 		<script type="module" src="/src/index.tsx"></script>
 	</body>
 </html>
