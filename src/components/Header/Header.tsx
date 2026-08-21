@@ -8,7 +8,7 @@ const Header = () => {
 	const location = useLocation()
 	return (
 		<div className='header'>
-			<span className='username'>{telegram.user.username}</span>
+			<span className='username'>{telegram?.user?.username || 'Аноним'}</span>
 
 			<Link
 				to={location.pathname === '/form' ? '/' : '/form'}
