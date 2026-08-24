@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useTelegram } from '../../hooks/useTelegram'
 import ProductItem from '../ProductItem/ProductItem'
 import './ProductList.css'
@@ -21,14 +21,16 @@ const ProductList: React.FC<ProductListProps> = ({
 			return acc + item.price
 		}, 0)
 	}, [])
+	const totalPrice = useMemo(
+		() => getTotalPrice(productsBasket),
+		[productsBasket, getTotalPrice],
+	)
 	const navigate = useNavigate()
 	const { tg } = useTelegram()
 	useEffect(() => {
 		if (productsBasket.length > 0) {
 			tg.MainButton.show()
-			tg.MainButton.setParams({
-				text: `Купить за ${getTotalPrice(productsBasket)}`,
-			})
+			tg.MainButton.setText(`🛒 Купить за ${totalPrice} ₽`)
 
 			tg.MainButton.onClick(() => {
 				navigate('/form')
@@ -37,7 +39,7 @@ const ProductList: React.FC<ProductListProps> = ({
 		return () => {
 			tg?.MainButton.offClick()
 		}
-	}, [productsBasket, getTotalPrice, tg, navigate])
+	}, [productsBasket, totalPrice, tg, navigate])
 
 	if (products.length === 0) {
 		return (
