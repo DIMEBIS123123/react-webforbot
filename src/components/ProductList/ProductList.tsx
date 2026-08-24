@@ -29,14 +29,16 @@ const ProductList: React.FC<ProductListProps> = ({
 	const { tg } = useTelegram()
 	useEffect(() => {
 		if (productsBasket.length > 0) {
+			tg.MainButton.hide()
+			tg.MainButton.setText(`🛒 Купить за ${totalPrice} ₽`)
 			tg.MainButton.show()
 			console.log(`🛒 Купить за ${totalPrice} ₽`)
-			tg.MainButton.setText(`🛒 Купить за ${totalPrice} ₽`)
 
 			tg.MainButton.onClick(() => {
 				navigate('/form')
 			})
 		}
+
 		return () => {
 			tg?.MainButton.offClick()
 		}
