@@ -12,8 +12,8 @@ function App() {
 
 	const { products, handleAddToCart, productsBasket } = useProducts()
 	useEffect(() => {
-		telegram.tg.ready()
-	}, [])
+		if (telegram.tg) telegram.tg.ready()
+	}, [telegram.tg])
 
 	return (
 		<div>
@@ -31,6 +31,16 @@ function App() {
 					}
 				></Route>
 				<Route path='/form' element={<Form />}></Route>
+				<Route
+					path='*'
+					element={
+						<ProductList
+							products={products}
+							onAddToCart={handleAddToCart}
+							productsBasket={productsBasket}
+						/>
+					}
+				></Route>
 			</Routes>
 		</div>
 	)

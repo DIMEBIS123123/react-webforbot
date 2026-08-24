@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { Product } from '../types/product'
 import narutoImg from '../assets/naruto.webp'
 import aotImg from '../assets/aot.jpeg'
@@ -38,9 +38,9 @@ export function useProducts() {
 		},
 	]
 
-	const handleAddToCart = (product: Product) => {
+	const handleAddToCart = useCallback((product: Product) => {
 		alert('Добавлен товар:' + product.name)
-		setProductsBasket([...productsBasket, product])
-	}
+		setProductsBasket(prev => [...prev, product])
+	}, [])
 	return { products, handleAddToCart, productsBasket }
 }
