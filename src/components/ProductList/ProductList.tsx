@@ -30,6 +30,7 @@ const ProductList: React.FC<ProductListProps> = ({
 	useEffect(() => {
 		if (productsBasket.length > 0) {
 			tg.MainButton.show()
+			console.log(`🛒 Купить за ${totalPrice} ₽`)
 			tg.MainButton.setText(`🛒 Купить за ${totalPrice} ₽`)
 
 			tg.MainButton.onClick(() => {
