@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import './Form.css'
 import { useTelegram } from '../../hooks/useTelegram'
 import { fetchData } from '../../utils/axiosPost'
@@ -33,10 +33,14 @@ const Form = ({ productsBasket }: FormProp) => {
 	})
 	const { tg, onClose, queryId } = useTelegram()
 	const totalPrice = getTotalPrice(productsBasket)
+	const isKeyboardLaunch = tg?.initDataUnsafe?.chat_type
 
 	const [errors, setErrors] = useState<FormErrors>({})
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
+	useEffect(() => {
+		tg.MainButton.hide()
+	}, [])
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 	) => {
@@ -90,7 +94,7 @@ const Form = ({ productsBasket }: FormProp) => {
 		setIsSubmitting(true)
 
 		try {
-			if (tg && typeof tg.sendData === 'function') {
+			if (!isKeyboardLaunch) {
 				tg.sendData(JSON.stringify(formData))
 				alert('Заказ успешно оформлен! (sd)')
 			} else {
