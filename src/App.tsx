@@ -30,7 +30,10 @@ function App() {
 						/>
 					}
 				></Route>
-				<Route path='/form' element={<Form />}></Route>
+				<Route
+					path='/form'
+					element={<Form productsBasket={productsBasket} />}
+				></Route>
 				<Route
 					path='*'
 					element={

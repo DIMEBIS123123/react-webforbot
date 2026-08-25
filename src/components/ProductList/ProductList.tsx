@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useTelegram } from '../../hooks/useTelegram'
 import ProductItem from '../ProductItem/ProductItem'
 import './ProductList.css'
 import { useNavigate } from 'react-router-dom'
 import type { Product } from '../../types/product'
+
+import { getTotalPrice } from '../../utils/totalPrice'
 
 interface ProductListProps {
 	products: Product[]
@@ -16,15 +18,7 @@ const ProductList: React.FC<ProductListProps> = ({
 	onAddToCart,
 	productsBasket,
 }) => {
-	const getTotalPrice = useCallback((items: Product[]) => {
-		return items.reduce((acc, item) => {
-			return acc + item.price
-		}, 0)
-	}, [])
-	const totalPrice = useMemo(
-		() => getTotalPrice(productsBasket),
-		[productsBasket, getTotalPrice],
-	)
+	const totalPrice = getTotalPrice(productsBasket)
 	const navigate = useNavigate()
 	const { tg } = useTelegram()
 	useEffect(() => {
@@ -32,7 +26,6 @@ const ProductList: React.FC<ProductListProps> = ({
 			tg.MainButton.hide()
 			tg.MainButton.setText(`🛒 Купить за ${totalPrice} ₽`)
 			tg.MainButton.show()
-			console.log(`🛒 Купить за ${totalPrice} ₽`)
 
 			tg.MainButton.onClick(() => {
 				navigate('/form')

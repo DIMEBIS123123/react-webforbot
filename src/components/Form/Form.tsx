@@ -1,6 +1,9 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import './Form.css'
 import { useTelegram } from '../../hooks/useTelegram'
+import { fetchData } from '../../utils/axiosPost'
+import type { Product } from '../../types/product'
+import { getTotalPrice } from '../../utils/totalPrice'
 
 interface OrderFormData {
 	name: string
@@ -14,8 +17,11 @@ interface OrderFormData {
 interface FormErrors {
 	[key: string]: string
 }
+interface FormProp {
+	productsBasket: Product[]
+}
 
-const Form = () => {
+const Form = ({ productsBasket }: FormProp) => {
 	const [formData, setFormData] = useState<OrderFormData>({
 		name: '',
 		phone: '',
@@ -25,7 +31,8 @@ const Form = () => {
 		paymentMethod: 'card',
 		comment: '',
 	})
-	const { tg, onClose } = useTelegram()
+	const { tg, onClose, queryId } = useTelegram()
+	const totalPrice = getTotalPrice(productsBasket)
 
 	const [errors, setErrors] = useState<FormErrors>({})
 	const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -83,12 +90,13 @@ const Form = () => {
 		setIsSubmitting(true)
 
 		try {
-			// Здесь будет отправка данных на сервер
-			console.log('Отправка заказа:', formData)
-
-			tg.sendData(JSON.stringify(formData))
-
-			alert('Заказ успешно оформлен!')
+			if (tg && typeof tg.sendData === 'function') {
+				tg.sendData(JSON.stringify(formData))
+				alert('Заказ успешно оформлен! (sd)')
+			} else {
+				fetchData(productsBasket, totalPrice, queryId, formData)
+				alert('Заказ успешно оформлен! (fd)')
+			}
 
 			// Сброс формы
 			setFormData({
